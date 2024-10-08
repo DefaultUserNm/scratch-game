@@ -1,0 +1,43 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.example.scratch'
+version = '1.0.0'
+
+repositories {
+    mavenCentral()
+}
+
+jar {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    manifest {
+        attributes["Main-Class"] = "com.example.scratch.Application"
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+dependencies {
+    // CLI
+    implementation 'commons-cli:commons-cli:1.9.0'
+
+    // serializing / deserializing JSON
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.18.0'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.18.0'
+
+    // removing boilerplate code
+    implementation 'org.projectlombok:lombok:1.18.34'
+    annotationProcessor 'org.projectlombok:lombok:1.18.34'
+
+    // logging
+    implementation 'ch.qos.logback:logback-classic:1.5.8'
+
+    // testing
+    testImplementation 'org.spockframework:spock-core:2.4-M4-groovy-4.0'
+}
+
+test {
+    useJUnitPlatform()
+}
