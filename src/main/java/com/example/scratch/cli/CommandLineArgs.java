@@ -29,13 +29,13 @@ public class CommandLineArgs {
                 Option.builder(CONFIG_PATH)
                     .longOpt(CONFIG_PATH)
                     .hasArg()
-                    .required(true)
+                    .required()
                     .build())
             .addOption(
                 Option.builder(BETTING_AMOUNT)
                     .longOpt(BETTING_AMOUNT)
                     .hasArg()
-                    .required(true)
+                    .required()
                     .build());
         return new DefaultParser().parse(options, args);
     }

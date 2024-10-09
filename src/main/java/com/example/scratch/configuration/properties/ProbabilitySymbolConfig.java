@@ -1,4 +1,4 @@
-package com.example.scratch.configuration;
+package com.example.scratch.configuration.properties;
 
 import lombok.Data;
 

@@ -1,6 +1,6 @@
 package com.example.scratch.engine;
 
-import com.example.scratch.configuration.GameConfig;
+import com.example.scratch.configuration.properties.GameConfig;
 import com.example.scratch.model.GameMatrix;
 import com.example.scratch.util.RandomCollection;
 import lombok.RequiredArgsConstructor;
@@ -44,6 +44,13 @@ public class MatrixGenerator {
         return new RandomCollection<>(standardMap).next();
     }
 
+    /**
+     * Puts 1 bonus symbol in a random cell
+     * P.S. the problem description does not clearly say how many bonus symbol should be generated or how applied bonus
+     * should be determined in case there is more than 1, so I've implemented it the same way as in 2 examples
+     * (1 bonus per matrix)
+     * @param matrix - game matrix
+     */
     private void putBonusSymbol(GameMatrix matrix) {
         Random random = new Random();
         int row = random.nextInt(config.getRows());

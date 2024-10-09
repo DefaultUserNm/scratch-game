@@ -1,5 +1,6 @@
 package com.example.scratch.configuration;
 
+import com.example.scratch.configuration.properties.GameConfig;
 import com.example.scratch.util.MapperHolder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;

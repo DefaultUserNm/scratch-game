@@ -1,15 +1,14 @@
 package com.example.scratch.engine;
 
-import com.example.scratch.configuration.GameConfig;
-import com.example.scratch.configuration.Symbol;
+import com.example.scratch.configuration.properties.GameConfig;
+import com.example.scratch.configuration.properties.Symbol;
 import com.example.scratch.model.GameMatrix;
-import com.example.scratch.model.Pair;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static com.example.scratch.configuration.SymbolType.BONUS;
+import static com.example.scratch.configuration.properties.SymbolType.BONUS;
 
 /*
  * @created 08.10.2024
@@ -21,7 +20,7 @@ public class BonusSymbolProcessor {
     private final GameMatrix matrix;
     private final GameConfig config;
 
-    public Pair<String, Symbol> process() {
+    public Symbol process() {
         Map<String, Symbol> bonusSymbols = config.getSymbols()
             .entrySet()
             .stream()
@@ -32,7 +31,7 @@ public class BonusSymbolProcessor {
                 var element = matrix.get(i, j);
                 Symbol bonus = bonusSymbols.get(element);
                 if (bonus != null) {
-                    return Pair.of(element, bonus);
+                    return bonus;
                 }
             }
         }

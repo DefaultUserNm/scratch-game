@@ -1,6 +1,7 @@
-package com.example.scratch.configuration;
+package com.example.scratch.configuration.properties;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
 @Data
 public class WinCombination {
 
-    @JsonAlias("reward_multiplier")
+    @JsonProperty("reward_multiplier")
     private Double rewardMultiplier;
 
     private WhenConditionType when;
@@ -21,8 +22,9 @@ public class WinCombination {
 
     private String group;
 
-    @JsonAlias("covered_areas")
+    @JsonProperty("covered_areas")
     private List<List<String>> coveredAreas;
 
+    @JsonIgnore
     private String name;
 }

@@ -5,7 +5,7 @@ import com.example.scratch.model.GameMatrix;
 /*
  * @created 09.10.2024
  * @author Alexander Kabakov
- * Matrix from problem description
+ * Matrix from problem description #2
  */
 public class TestGameMatrix2 extends GameMatrix {
 

@@ -1,6 +1,7 @@
-package com.example.scratch.configuration;
+package com.example.scratch.configuration.properties;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 /*
@@ -10,7 +11,7 @@ import lombok.Data;
 @Data
 public class Symbol {
 
-    @JsonAlias("reward_multiplier")
+    @JsonProperty("reward_multiplier")
     private Double rewardMultiplier;
 
     private SymbolType type;
@@ -19,5 +20,6 @@ public class Symbol {
 
     private SymbolImpactType impact;
 
+    @JsonIgnore
     private String name;
 }

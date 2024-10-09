@@ -1,6 +1,6 @@
-package com.example.scratch.configuration;
+package com.example.scratch.configuration.properties;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.util.HashMap;
@@ -21,7 +21,7 @@ public class GameConfig {
 
     private ProbabilityConfig probabilities;
 
-    @JsonAlias("win_combinations")
+    @JsonProperty("win_combinations")
     private Map<String, WinCombination> winCombinations = new HashMap<>();
 
     public void afterPropertiesSet() {

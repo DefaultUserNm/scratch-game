@@ -1,8 +1,9 @@
 package com.example.scratch.engine;
 
-import com.example.scratch.configuration.GameConfig;
-import com.example.scratch.configuration.WhenConditionType;
-import com.example.scratch.configuration.WinCombination;
+import com.example.scratch.configuration.properties.GameConfig;
+import com.example.scratch.configuration.properties.Symbol;
+import com.example.scratch.configuration.properties.WhenConditionType;
+import com.example.scratch.configuration.properties.WinCombination;
 import com.example.scratch.model.GameMatrix;
 import lombok.RequiredArgsConstructor;
 
@@ -18,9 +19,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static com.example.scratch.configuration.SymbolType.STANDARD;
-import static com.example.scratch.configuration.WhenConditionType.LINEAR_SYMBOLS;
-import static com.example.scratch.configuration.WhenConditionType.SAME_SYMBOLS;
+import static com.example.scratch.configuration.properties.SymbolType.STANDARD;
+import static com.example.scratch.configuration.properties.WhenConditionType.LINEAR_SYMBOLS;
+import static com.example.scratch.configuration.properties.WhenConditionType.SAME_SYMBOLS;
 import static java.lang.Integer.parseInt;
 import static java.util.function.BinaryOperator.maxBy;
 import static java.util.function.Function.identity;
@@ -33,6 +34,8 @@ import static org.apache.commons.lang3.StringUtils.substringBefore;
  */
 @RequiredArgsConstructor
 public class WinningConfigurationProcessor {
+
+    public static final String SEPARATOR = ":";
 
     private final GameMatrix matrix;
     private final GameConfig config;
@@ -65,10 +68,10 @@ public class WinningConfigurationProcessor {
 
     private Set<String> getStandardSymbols() {
         return config.getSymbols()
-            .entrySet()
+            .values()
             .stream()
-            .filter(s -> s.getValue().getType() == STANDARD)
-            .map(Map.Entry::getKey)
+            .filter(s -> s.getType() == STANDARD)
+            .map(Symbol::getName)
             .collect(Collectors.toSet());
     }
 
@@ -99,11 +102,10 @@ public class WinningConfigurationProcessor {
     }
 
     private String getAreaSymbol(List<String> area) {
-        String separator = ":";
         String symbol = null;
         for (String cell : area) {
-            int row = parseInt(substringBefore(cell, separator));
-            int column = parseInt(substringAfter(cell, separator));
+            int row = parseInt(substringBefore(cell, SEPARATOR));
+            int column = parseInt(substringAfter(cell, SEPARATOR));
             String cellData = matrix.get(row, column);
             if (symbol == null || symbol.equals(cellData)) {
                 symbol = cellData;
@@ -117,7 +119,6 @@ public class WinningConfigurationProcessor {
 
     private Map<String, List<String>> mergeResults(
         Map<String, List<WinCombination>> m1, Map<String, List<WinCombination>> m2) {
-
         Set<String> keys1 = m1.keySet();
         Set<String> keys2 = m2.keySet();
         var keys = new HashSet<String>();

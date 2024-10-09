@@ -1,17 +1,17 @@
 package com.example.scratch.engine;
 
-import com.example.scratch.configuration.GameConfig;
-import com.example.scratch.configuration.Symbol;
-import com.example.scratch.configuration.WinCombination;
+import com.example.scratch.configuration.properties.GameConfig;
+import com.example.scratch.configuration.properties.Symbol;
+import com.example.scratch.configuration.properties.WinCombination;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 import java.util.Map;
 
-import static com.example.scratch.configuration.SymbolImpactType.EXTRA_BONUS;
-import static com.example.scratch.configuration.SymbolImpactType.MISS;
-import static com.example.scratch.configuration.SymbolImpactType.MULTIPLY_REWARD;
+import static com.example.scratch.configuration.properties.SymbolImpactType.EXTRA_BONUS;
+import static com.example.scratch.configuration.properties.SymbolImpactType.MISS;
+import static com.example.scratch.configuration.properties.SymbolImpactType.MULTIPLY_REWARD;
 
 /*
  * @created 08.10.2024

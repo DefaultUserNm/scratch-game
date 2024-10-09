@@ -1,6 +1,6 @@
-package com.example.scratch.configuration;
+package com.example.scratch.configuration.properties;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.util.List;
@@ -12,9 +12,9 @@ import java.util.List;
 @Data
 public class ProbabilityConfig {
 
-    @JsonAlias("standard_symbols")
+    @JsonProperty("standard_symbols")
     private List<ProbabilitySymbolConfig> standardSymbols;
 
-    @JsonAlias("bonus_symbols")
+    @JsonProperty("bonus_symbols")
     private ProbabilitySymbolConfig bonusSymbols;
 }
