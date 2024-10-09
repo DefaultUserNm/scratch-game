@@ -4,6 +4,7 @@ import com.example.scratch.configuration.GameConfig;
 import com.example.scratch.configuration.Symbol;
 import com.example.scratch.configuration.WinCombination;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,7 @@ import static com.example.scratch.configuration.SymbolImpactType.MULTIPLY_REWARD
  * @created 08.10.2024
  * @author Alexander Kabakov
  */
+@Slf4j
 @RequiredArgsConstructor
 public class RewardCalculator {
 
@@ -24,33 +26,38 @@ public class RewardCalculator {
     private final GameConfig config;
     private final int bettingAmount;
 
-    public float calculate() {
+    public double calculate() {
         float baseReward = calculateBaseReward();
         return applyBonus(baseReward);
     }
 
     private float calculateBaseReward() {
-        int sum = 0;
+        float sum = 0;
         for (Map.Entry<String, List<String>> entry : winningsConfigurations.entrySet()) {
-            int symbolMultiplier = config.getSymbols().get(entry.getKey()).getRewardMultiplier();
-            int winningMultiplier = entry.getValue().stream()
+            double symbolMultiplier = config.getSymbols().get(entry.getKey()).getRewardMultiplier();
+            double winningMultiplier = entry.getValue().stream()
                 .map(s -> config.getWinCombinations().get(s))
                 .map(WinCombination::getRewardMultiplier)
-                .reduce(1, (a, b) -> a * b);
-            sum += bettingAmount * symbolMultiplier * winningMultiplier;
+                .reduce((double) 1, (a, b) -> a * b);
+            double increment = bettingAmount * symbolMultiplier * winningMultiplier;
+            sum += increment;
+            log.info("Reward for symbol [{}] is {}", entry.getKey(), increment);
         }
         return sum;
     }
 
-    private float applyBonus(float baseReward) {
+    private double applyBonus(float baseReward) {
+        double bonusValue;
         if (bonus == null || bonus.getImpact() == MISS) {
-            return baseReward;
+            bonusValue = baseReward;
         } else if (bonus.getImpact() == EXTRA_BONUS) {
-            return baseReward + bonus.getExtra();
+            bonusValue = baseReward + bonus.getExtra();
         } else if (bonus.getImpact() == MULTIPLY_REWARD) {
-            return baseReward * bonus.getRewardMultiplier();
+            bonusValue = baseReward * bonus.getRewardMultiplier();
         } else {
             throw new RuntimeException("Impact not recognized: " + bonus.getImpact());
         }
+
+        return bonusValue;
     }
 }

@@ -23,4 +23,9 @@ public class GameConfig {
 
     @JsonAlias("win_combinations")
     private Map<String, WinCombination> winCombinations = new HashMap<>();
+
+    public void afterPropertiesSet() {
+        symbols.forEach((key, value) -> value.setName(key));
+        winCombinations.forEach((key, value) -> value.setName(key));
+    }
 }

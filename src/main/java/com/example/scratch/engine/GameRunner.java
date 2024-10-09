@@ -24,7 +24,7 @@ public class GameRunner {
         Pair<String, Symbol> bonusSymbol = winningsConfigurations.isEmpty()
             ? Pair.of(null, null)
             : new BonusSymbolProcessor(matrix, config).process();
-        float reward = new RewardCalculator(winningsConfigurations, bonusSymbol.getRight(), config, bettingAmount)
+        double reward = new RewardCalculator(winningsConfigurations, bonusSymbol.getRight(), config, bettingAmount)
             .calculate();
 
         return new GameResult()

@@ -11,11 +11,13 @@ import lombok.Data;
 public class Symbol {
 
     @JsonAlias("reward_multiplier")
-    private Integer rewardMultiplier;
+    private Double rewardMultiplier;
 
     private SymbolType type;
 
-    private Float extra;
+    private Double extra;
 
     private SymbolImpactType impact;
+
+    private String name;
 }

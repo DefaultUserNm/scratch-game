@@ -7,7 +7,7 @@ import com.example.scratch.engine.GameRunner;
 import com.example.scratch.model.GameResult;
 import com.example.scratch.util.MapperHolder;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.cli.ParseException;
 
 import java.io.IOException;
@@ -18,7 +18,7 @@ import java.io.IOException;
  */
 public class Application {
 
-    private static final ObjectWriter WRITER = MapperHolder.getWriter();
+    private static final ObjectMapper MAPPER = MapperHolder.getInstance();
 
     public static void main(String[] args) throws IOException, ParseException {
         setupLogging();
@@ -37,6 +37,6 @@ public class Application {
     }
 
     private static void printResult(GameResult result) throws JsonProcessingException {
-        System.out.println(WRITER.writeValueAsString(result));
+        System.out.println(MAPPER.writerWithDefaultPrettyPrinter().writeValueAsString(result));
     }
 }

@@ -23,6 +23,7 @@ public class ConfigLoader {
     public GameConfig load() throws IOException {
         var result = MAPPER.readValue(new File(location), GameConfig.class);
         log.debug("Loaded game config: {}", result);
+        result.afterPropertiesSet();
 
         return result;
     }

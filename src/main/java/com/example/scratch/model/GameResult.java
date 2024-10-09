@@ -15,7 +15,7 @@ public class GameResult {
 
     private GameMatrix matrix;
 
-    private Float reward;
+    private Double reward;
 
     @JsonAlias("applied_winning_combinations")
     private Map<String, List<String>> appliedWinningCombinations;

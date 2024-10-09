@@ -13,7 +13,7 @@ import java.util.List;
 public class WinCombination {
 
     @JsonAlias("reward_multiplier")
-    private Integer rewardMultiplier;
+    private Double rewardMultiplier;
 
     private WhenConditionType when;
 
@@ -23,4 +23,6 @@ public class WinCombination {
 
     @JsonAlias("covered_areas")
     private List<List<String>> coveredAreas;
+
+    private String name;
 }
