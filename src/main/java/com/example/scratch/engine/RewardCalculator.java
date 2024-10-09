@@ -27,12 +27,12 @@ public class RewardCalculator {
     private final int bettingAmount;
 
     public double calculate() {
-        float baseReward = calculateBaseReward();
+        double baseReward = calculateBaseReward();
         return applyBonus(baseReward);
     }
 
-    private float calculateBaseReward() {
-        float sum = 0;
+    private double calculateBaseReward() {
+        double sum = 0;
         for (Map.Entry<String, List<String>> entry : winningsConfigurations.entrySet()) {
             double symbolMultiplier = config.getSymbols().get(entry.getKey()).getRewardMultiplier();
             double winningMultiplier = entry.getValue().stream()
@@ -46,7 +46,7 @@ public class RewardCalculator {
         return sum;
     }
 
-    private double applyBonus(float baseReward) {
+    private double applyBonus(double baseReward) {
         double bonusValue;
         if (bonus == null || bonus.getImpact() == MISS) {
             bonusValue = baseReward;
