@@ -2,16 +2,15 @@ package com.example.scratch.engine;
 
 import com.example.scratch.configuration.GameConfig;
 import com.example.scratch.configuration.Symbol;
+import com.example.scratch.model.GameMatrix;
 import com.example.scratch.model.GameResult;
 import com.example.scratch.model.Pair;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 /*
  * @created 08.10.2024
  * @author Alexander Kabakov
  */
-@Slf4j
 @RequiredArgsConstructor
 public class GameRunner {
 
@@ -20,6 +19,10 @@ public class GameRunner {
 
     public GameResult run() {
         var matrix = new MatrixGenerator(config).generateMatrix();
+        return run(matrix);
+    }
+
+    GameResult run(GameMatrix matrix) {
         var winningsConfigurations = new WinningConfigurationProcessor(matrix, config).process();
         Pair<String, Symbol> bonusSymbol = winningsConfigurations.isEmpty()
             ? Pair.of(null, null)
